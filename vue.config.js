@@ -1,3 +1,3 @@
-module.exports = {
-    publicPath: "/tiramisu-web/",
-};
+module.exports  = {
+    publicPath: "/tiramisu-web/"
+}
