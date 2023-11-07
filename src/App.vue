@@ -12,25 +12,25 @@
             <li class="list-group-item">
               <label class="form-check-label form-check form-switch">
                 <input class="form-check-input" type="checkbox" v-model="showBackdrop">
-                Show backdrop
+                Backdrop layer
               </label>
             </li>
             <li class="list-group-item">
               <label class="form-check-label form-check form-switch">
                 <input class="form-check-input" type="checkbox" v-model="showActivities">
-                Show activity pictograms
+                Activity pictograms layer
               </label>
             </li>
             <li class="list-group-item">
               <label class="form-check-label form-check form-switch">
                 <input class="form-check-input" type="checkbox" v-model="showActivityLabels">
-                Show activity labels
+                Activity labels layer
               </label>
             </li>
             <li class="list-group-item">
               <label class="form-check-label form-check form-switch">
                 <input class="form-check-input" type="checkbox" v-model="showEdges">
-                Show edges
+                Edges layer
               </label>
             </li>
           </ul>
