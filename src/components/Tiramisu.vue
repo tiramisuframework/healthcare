@@ -26,6 +26,7 @@
       <!-- edges -->
       <g v-for="(edge, index) in model.edges" :key="index">
         <path
+            v-if="showEdges"
             :d="getCoordinates(
               images.actions[edge.from].x + (images.actions[edge.from].w / 2),
               images.actions[edge.from].y + (images.actions[edge.from].h / 2),
@@ -37,33 +38,6 @@
             :stroke-opacity="edge.intensity"
             :marker-end="'url(#arrowhead-'+ Math.round(edge.intensity * 10)/10 +')'"
         />
-<!--        <line-->
-<!--          v-if="showEdges"-->
-<!--          :x1="getCoordinates(-->
-<!--              images.actions[edge.from].x + (images.actions[edge.from].w / 2),-->
-<!--              images.actions[edge.from].y + (images.actions[edge.from].h / 2),-->
-<!--              images.actions[edge.to].x + (images.actions[edge.to].w / 2),-->
-<!--              images.actions[edge.to].y + (images.actions[edge.to].h / 2))['x1']"-->
-<!--          :y1="getCoordinates(-->
-<!--              images.actions[edge.from].x + (images.actions[edge.from].w / 2),-->
-<!--              images.actions[edge.from].y + (images.actions[edge.from].h / 2),-->
-<!--              images.actions[edge.to].x + (images.actions[edge.to].w / 2),-->
-<!--              images.actions[edge.to].y + (images.actions[edge.to].h / 2))['y1']"-->
-<!--          :x2="getCoordinates(-->
-<!--              images.actions[edge.from].x + (images.actions[edge.from].w / 2),-->
-<!--              images.actions[edge.from].y + (images.actions[edge.from].h / 2),-->
-<!--              images.actions[edge.to].x + (images.actions[edge.to].w / 2),-->
-<!--              images.actions[edge.to].y + (images.actions[edge.to].h / 2))['x2']"-->
-<!--          :y2="getCoordinates(-->
-<!--              images.actions[edge.from].x + (images.actions[edge.from].w / 2),-->
-<!--              images.actions[edge.from].y + (images.actions[edge.from].h / 2),-->
-<!--              images.actions[edge.to].x + (images.actions[edge.to].w / 2),-->
-<!--              images.actions[edge.to].y + (images.actions[edge.to].h / 2))['y2']"-->
-<!--          :stroke-width="edge.intensity * 20"-->
-<!--          :stroke-opacity="edge.intensity"-->
-<!--          stroke="black"-->
-<!--          :marker-end="'url(#arrowhead-'+ Math.round(edge.intensity * 10)/10 +')'"-->
-<!--        />-->
       </g>
 
       <!-- activities -->
@@ -191,11 +165,9 @@ export default {
       const newY1 = y1 + size * Math.sin(angle);
       const newX2 = x2 - size * Math.cos(angle);
       const newY2 = y2 - size * Math.sin(angle);
-
       // define control points for a quadratic curve
       const control = this.calculateControlPoint(newX1, newY1, newX2, newY2, 0.1);
-
-      // return {x1: newX1, y1: newY1, x2: newX2, y2: newY2};
+      // spit out the path of the quadratic curve for the svg
       return 'M ' + newX1 + ' ' + newY1 + ' Q ' + control['x'] + ' ' + control['y'] + ' ' + newX2 + ' ' + newY2;
     },
     calculateControlPoint(x1, y1, x2, y2, bendFactor) {
