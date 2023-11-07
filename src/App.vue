@@ -9,6 +9,7 @@
             @showBackdrop="this.showBackdrop= $event"
             @showActivities="this.showActivities= $event"
             @showActivityLabels="this.showActivityLabels= $event"
+            @showActivityShadows="this.showActivityShadows= $event"
             @showEdges="this.showEdges= $event"
           />
         </div>
@@ -18,6 +19,7 @@
               :show-backdrop="showBackdrop"
               :show-activities="showActivities"
               :show-activity-labels="showActivityLabels"
+              :show-activity-shadows="showActivityShadows"
               :show-edges="showEdges"
           />
         </div>
@@ -44,6 +46,7 @@ export default {
     showBackdrop: true,
     showActivities: true,
     showActivityLabels: true,
+    showActivityShadows: true,
     showEdges: true
   }),
 };

@@ -40,7 +40,7 @@
         />
       </g>
 
-      <!-- activities -->
+      <!-- activity labels -->
       <g v-for="(action, name, index) in images.actions" :key="name">
         <text
             v-if="showActivityLabels && name in model.actions"
@@ -62,7 +62,8 @@ export default {
     showBackdrop: true,
     showActivities: true,
     showActivityLabels: true,
-    showEdges: true
+    showActivityShadows: true,
+    showEdges: true,
   },
   data: () => ({
     dimensions: {
@@ -155,7 +156,7 @@ export default {
       }
     },
     intensityActivity(intensity) {
-      if (!Number.isNaN(intensity))
+      if ((!Number.isNaN(intensity)) && this.showActivityShadows)
         return 'filter: drop-shadow(0px 0px '+ (intensity*20) +'px green)';
     },
     getCoordinates(x1, y1, x2, y2) {
