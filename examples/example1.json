@@ -21,7 +21,7 @@
       "pictogram":"https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/bedroom.png",
       "x":535, "y":338,
       "w":253, "h":158,
-      "info": "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/bedroom.html"
+      "info": "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/bed.html"
     },
     "bathroom": {
       "pictogram":"https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/bathroom.png",
