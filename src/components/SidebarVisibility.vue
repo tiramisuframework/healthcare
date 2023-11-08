@@ -46,7 +46,7 @@ export default {
     showBackdrop: true,
     showActivities: true,
     showActivityLabels: true,
-    showActivityShadows: true,
+    showActivityShadows: false,
     showEdges: true
   }),
 };

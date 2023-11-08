@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg :width="dimensions.width" :height="dimensions.height" xmlns="http://www.w3.org/2000/svg">
+    <svg :width="images.backdrop.width" :height="images.backdrop.height" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arrowhead-0" markerWidth="3" markerHeight="2" refX="0" refY="1" orient="auto"><polygon points="0 0, 2 1, 0 2" opacity="0" /></marker>
         <marker id="arrowhead-0.1" markerWidth="3" markerHeight="2" refX="0" refY="1" orient="auto"><polygon points="0 0, 2 1, 0 2" opacity="0.1" /></marker>
@@ -16,7 +16,7 @@
       </defs>
 
       <!-- backdrop -->
-      <image v-if="showBackdrop" :href="images.backdropUrl" />
+      <image v-if="showBackdrop" :href="images.backdrop.pictogram" />
 
       <!-- activities -->
       <g v-if="showActivities" v-for="(action, name, index) in images.actions" :key="name">
@@ -51,7 +51,33 @@
           <tspan dy="1.2em" :x="action.x + (action.w / 2) - 50" style="font-size: smaller">Freq.: {{ Math.ceil(model.actions[name].intensity * 100)/100 }}</tspan>
         </text>
       </g>
+
+      <!-- activities -->
+      <g v-for="(action, name, index) in images.actions" :key="name">
+        <rect
+            v-if="name in model.actions"
+            :x="action.x" :y="action.y"
+            :width="action.w" :height="action.h"
+            class="activityRectangle"
+            data-bs-toggle="modal"
+            data-bs-target="#SeeDetailsModal"
+            @click="displayContent(name)"
+        />
+      </g>
     </svg>
+    <div class="modal fade" id="SeeDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Details for <code>{{ this.activeAction }}</code></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="modal-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -66,33 +92,27 @@ export default {
     showEdges: true,
   },
   data: () => ({
-    dimensions: {
-      width: 800,
-      height: 508
-    },
+    configuration: "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1.json",
+    dfg: "https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1.dfg",
     images: {
-      backdropUrl: 'https://raw.githubusercontent.com/delas/tiramisu/master/examples/example2/backdrop.png',
-      actions: {
-        "entrance": { pictogram:"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example2/entrance.png", x:732,y:228, w: 64,h: 63 },
-        "living":   { pictogram:"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example2/living.png",   x:181,y:305, w:346,h:190 },
-        "bedroom":  { pictogram:"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example2/bedroom.png",  x:535,y:338, w:253,h:158 },
-        "bathroom": { pictogram:"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example2/bathroom.png", x:549,y:14,  w:117,h:192 },
-        "kitchen":  { pictogram:"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example2/kitchen.png",  x:171,y:14,  w:360,h:221 }
+      backdrop: {
+        pictogram: null,
+        width: 0,
+        height: 0
       },
     },
     model: {
-      actions: {
-        // "entrance": { intensity: 1 },
-        // "living": {intensity: 0.5}
-      },
-      edges: [
-        // { from: "entrance", to: "living",  intensity: 0.5 },
-        // { from: "living",   to: "kitchen", intensity: 1 }
-      ]
+      actions: {},
+      edges: []
     },
-    dfg: "https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1.dfg",
+    activeAction: null
   }),
   methods: {
+    async parseConfiguration(url) {
+      const response = await fetch(url);
+      const json = await response.json();
+      this.images = json;
+    },
     async parseDFG(url) {
       let i;
       const response = await fetch(url);
@@ -155,19 +175,26 @@ export default {
         }
       }
     },
+    async displayContent(name) {
+      this.activeAction = name;
+      const url = this.images.actions[name].info;
+      const response = await fetch(url);
+      const text = await response.text();
+      document.getElementById("modal-content").innerHTML = text;
+    },
     intensityActivity(intensity) {
       if ((!Number.isNaN(intensity)) && this.showActivityShadows)
         return 'filter: drop-shadow(0px 0px '+ (intensity*20) +'px green)';
     },
     getCoordinates(x1, y1, x2, y2) {
-      const size = 20;
+      const size = 40;
       const angle = Math.atan2(y2 - y1, x2 - x1);
       const newX1 = x1 + size * Math.cos(angle);
       const newY1 = y1 + size * Math.sin(angle);
       const newX2 = x2 - size * Math.cos(angle);
       const newY2 = y2 - size * Math.sin(angle);
       // define control points for a quadratic curve
-      const control = this.calculateControlPoint(newX1, newY1, newX2, newY2, 0.1);
+      const control = this.calculateControlPoint(newX1, newY1, newX2, newY2, 0.2);
       // spit out the path of the quadratic curve for the svg
       return 'M ' + newX1 + ' ' + newY1 + ' Q ' + control['x'] + ' ' + control['y'] + ' ' + newX2 + ' ' + newY2;
     },
@@ -188,7 +215,20 @@ export default {
     }
   },
   mounted() {
+    this.parseConfiguration(this.configuration);
     this.parseDFG(this.dfg);
   }
 }
 </script>
+
+<style scoped>
+.activityRectangle {
+  fill: none;
+  pointer-events: all;
+  stroke-width: 0;
+  stroke: red;
+}
+  .activityRectangle:hover {
+    stroke-width: 5;
+  }
+</style>
