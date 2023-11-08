@@ -1,14 +1,39 @@
 {
-  "activities":
-  [
-    {"pictogram":"examples\\example1\\entrance.png",  "label":"entrance", "x":640,"y":60},
-    {"pictogram":"examples\\example1\\living.png",    "label":"living",   "x":708,"y":500},
-    {"pictogram":"examples\\example1\\bed.png",       "label":"bedroom",  "x":36,"y":430},
-    {"pictogram":"examples\\example1\\bathroom.png",  "label":"bathroom", "x":35,"y":70},
-    {"pictogram":"examples\\example1\\kitchen.png",   "label":"kitchen",  "x":775,"y":72}
-  ],
-  "backdrop":{
-    "picture":"examples\\example1\\backdrop.png"
+  "backdrop": {
+    "pictogram": "https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1/backdrop.png",
+    "width": 800,
+    "height": 508
   },
-  "arrowColor": "#000000"
+  "actions": {
+    "entrance": {
+      "pictogram":"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1/entrance.png",
+      "x":732, "y":228,
+      "w": 64, "h": 63,
+      "info": "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/entrance.html"
+    },
+    "living": {
+      "pictogram":"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1/living.png",
+      "x":181, "y":305,
+      "w":346, "h":190,
+      "info": "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/living.html"
+    },
+    "bedroom": {
+      "pictogram":"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1/bedroom.png",
+      "x":535, "y":338,
+      "w":253, "h":158,
+      "info": "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/bedroom.html"
+    },
+    "bathroom": {
+      "pictogram":"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1/bathroom.png",
+      "x":549, "y":14,
+      "w":117, "h":192,
+      "info": "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/bathroom.html"
+    },
+    "kitchen": {
+      "pictogram":"https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1/kitchen.png",
+      "x":171, "y": 14,
+      "w":360, "h":221,
+      "info": "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1/kitchen.html"
+    }
+  }
 }
