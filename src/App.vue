@@ -1,16 +1,20 @@
 <template>
   <main>
     <Navbar />
-    <SidebarData />
+    <SidebarData
+      :configuration="configuration"
+      :dfg="dfg"
+      @configuration="this.configuration = $event.config; this.dfg = $event.dfg"
+      />
     <div class="container">
-      <div class="row">
+      <div class="row" v-show="this.configuration != null && this.dfg != null">
         <div class="col-md-3 bg-light sidebar">
           <SidebarVisibility
-            @showBackdrop="this.showBackdrop= $event"
-            @showActivities="this.showActivities= $event"
-            @showActivityLabels="this.showActivityLabels= $event"
-            @showActivityShadows="this.showActivityShadows= $event"
-            @showEdges="this.showEdges= $event"
+            @showBackdrop="this.showBackdrop = $event"
+            @showActivities="this.showActivities = $event"
+            @showActivityLabels="this.showActivityLabels = $event"
+            @showActivityShadows="this.showActivityShadows = $event"
+            @showEdges="this.showEdges = $event"
           />
         </div>
         <div class="col-md-9 ps-3">
@@ -21,7 +25,15 @@
               :show-activity-labels="showActivityLabels"
               :show-activity-shadows="showActivityShadows"
               :show-edges="showEdges"
+              :configuration="configuration"
+              :dfg="dfg"
           />
+        </div>
+      </div>
+      <div class="row" v-if="configuration == null || dfg == null">
+        <div class="col-12 text-muted text-center" style="height: calc(100vh - 3.5rem); padding-top: 25vh">
+          <p class="fs-5"><em>To start the visualization it is necessary to provide the configuration data.</em></p>
+          <p><a class="btn btn-primary" data-bs-toggle="offcanvas" href="#ConfigureData">Configure data</a></p>
         </div>
       </div>
     </div>
@@ -47,7 +59,12 @@ export default {
     showActivities: true,
     showActivityLabels: true,
     showActivityShadows: false,
-    showEdges: true
+    showEdges: true,
+    configuration: null,
+    dfg: null
   }),
 };
+</script>
+
+<script setup>
 </script>

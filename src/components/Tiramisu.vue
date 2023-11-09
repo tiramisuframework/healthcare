@@ -52,7 +52,7 @@
         </text>
       </g>
 
-      <!-- activities -->
+      <!-- activity links -->
       <g v-for="(action, name, index) in images.actions" :key="name">
         <rect
             v-if="name in model.actions"
@@ -90,10 +90,10 @@ export default {
     showActivityLabels: true,
     showActivityShadows: true,
     showEdges: true,
+    configuration: null,
+    dfg: null
   },
   data: () => ({
-    configuration: "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1.json",
-    dfg: "https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1.dfg",
     images: {
       backdrop: {
         pictogram: null,
@@ -108,6 +108,12 @@ export default {
     activeAction: null
   }),
   methods: {
+    refresh() {
+      if (this.configuration == null || this.dfg == null)
+        return;
+      this.parseConfiguration(this.configuration);
+      this.parseDFG(this.dfg);
+    },
     async parseConfiguration(url) {
       const response = await fetch(url);
       const json = await response.json();
@@ -214,9 +220,9 @@ export default {
       return { x: scaledX, y: scaledY };
     }
   },
-  mounted() {
-    this.parseConfiguration(this.configuration);
-    this.parseDFG(this.dfg);
+  watch: {
+    configuration: function() { this.refresh() },
+    dfg: function() { this.refresh() }
   }
 }
 </script>
