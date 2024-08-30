@@ -1,16 +1,16 @@
-# tiramisu-web
+# Instance of the Tiramisu framework for healthcare practitioners
 
-This template should help get you started developing with Vue 3 in Vite.
+This repository is an instance of the process mining - visual analytics framework Tiramisu. It is specifically designed to support healthcare practitioners in their daily activity of interpreting data referring to the behavior of patients affected by neurodegenerative diseases (e.g., dementia) by offering a representation that is more tailored to their domain.
 
-## Recommended IDE Setup
+A screenshot of the application is here:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+![image](https://github.com/tiramisuframework/healthcare/assets/867237/4f43292d-d9a7-4de4-b3a1-748ef100a78c)
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+The project is built using Vue 3 and Vite.
 
 ## Project Setup
+
+After cloning the repository, install all dependencies with:
 
 ```sh
 npm install
@@ -27,3 +27,4 @@ npm run dev
 ```sh
 npm run build
 ```
+Alternatively, a deployment of the project is available in Github Pages at https://tiramisuframework.github.io/healthcare/.

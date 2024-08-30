@@ -30,8 +30,8 @@
 export default {
   name: "SidebarData",
   data: () => ({
-    configuration: "https://raw.githubusercontent.com/delas/tiramisu-web/master/examples/example1.json",
-    dfg: "https://raw.githubusercontent.com/delas/tiramisu/master/examples/example1.dfg"
+    configuration: "https://raw.githubusercontent.com/tiramisuframework/healthcare/master/examples/example1.json",
+    dfg: "https://raw.githubusercontent.com/tiramisuframework/healthcare/master/examples/example1.dfg"
   }),
 };
 </script>
