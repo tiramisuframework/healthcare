@@ -34,6 +34,7 @@
         <div class="col-12 text-muted text-center" style="height: calc(100vh - 3.5rem); padding-top: 25vh">
           <p class="fs-5"><em>To start the visualization it is necessary to provide the configuration data.</em></p>
           <p><a class="btn btn-primary" data-bs-toggle="offcanvas" href="#ConfigureData">Configure data</a></p>
+          <p style="margin-top: 50px;"><img src="/tiramisu.png" /></p>
         </div>
       </div>
     </div>

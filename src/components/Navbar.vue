@@ -1,7 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow" data-bs-theme="dark" style="background-color: #900 !important">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow" data-bs-theme="dark" style="background-color: #A2035F !important">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Tiramisu Visualization</a>
+      <img src="/tiramisu.png" height="40" style="margin-right: 10px" />
+      <a class="navbar-brand" href="#"><em>Berries</em> Tiramisu Visualization</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
